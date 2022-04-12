@@ -1,0 +1,1 @@
+This project is a simple web app developed in Golang with HTML.
