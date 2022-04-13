@@ -30,12 +30,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!--- With this 'range', the HTML will be able to catch the struct in the main.go  -->
+                        {{range .}}
                         <tr>
-                            <td>Notebook</td>
-                            <td>Acer 16 GB RAM</td>
-                            <td>$1999.99</td>
-                            <td>2</td>
+                            <td>{{.Name}}</td>
+                            <td>{{.Description}}</td>
+                            <td>{{.Price}}</td>
+                            <td>{{.Quantity}}</td>
                         </tr>
+                        {{end}}
                     </tbody>
                 </table>
             </div>
