@@ -1,5 +1,9 @@
 package models
 
+import (
+	"example.com/m/db"
+)
+
 // The product struct
 type Product struct {
 	Id          int
@@ -9,8 +13,8 @@ type Product struct {
 	Quantity    int
 }
 
-func searchAllProducts() []Product {
-	db := DbConnection()
+func SearchAllProducts() []Product {
+	db := db.DbConnection()
 
 	allProducts, err := db.Query("select * from products")
 
@@ -46,4 +50,17 @@ func searchAllProducts() []Product {
 	defer db.Close()
 
 	return products
+}
+
+func CreateNewProduct(name, description string, price float64, quantity int) {
+	db := db.DbConnection()
+
+	dbInsertion, err := db.Prepare("insert into products(nome, description, price, quantity) values($1, $2, $3, $4)")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	dbInsertion.Exec(name, description, price, quantity)
+	defer db.Close()
 }
